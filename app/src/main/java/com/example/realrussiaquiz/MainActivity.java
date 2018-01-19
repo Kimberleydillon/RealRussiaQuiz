@@ -18,9 +18,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startQuiz(View view) {
+
+        //set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new CustomPagerAdapter(this));
+
+        // Find the view pager that will allow the user to swipe between fragments
+        ViewPager viewPager =  findViewById(R.id.viewpager);
+
+        // Create an adapter that knows which fragment show be shown on each page
+        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager());
+
+        //Set the adapter onto the view pager
+        viewPager.setAdapter(adapter);
 
     }
 }

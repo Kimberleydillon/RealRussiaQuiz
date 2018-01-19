@@ -4,4 +4,12 @@
     <string name="startquiz">Start Quiz 🇷🇺</string>
     <string name="red">RED</string>
     <string name="blue">BLUE</string>
+    <string name="qone">How many military casualties did the Soviet Union suffer in WW2?</string>
+    <string name="q1a1">400,000</string>
+    <string name="q1a2">800,000</string>
+    <string name="q1a3">10,000</string>
+    <string name="q1a4">11,000,000</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
