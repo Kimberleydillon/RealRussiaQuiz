@@ -15,6 +15,6 @@
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:padding="50dp"-->
-        <!--android:text="This is Main Activity View"/>-->
+        <!--android:text="Hi Mom!"/>-->
 
 </RelativeLayout>
