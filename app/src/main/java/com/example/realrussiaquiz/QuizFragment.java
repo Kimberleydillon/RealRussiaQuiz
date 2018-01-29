@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,12 +88,14 @@ public class QuizFragment extends Fragment {
                 setRadioButtonAnswers(rootView, "400,000", "800,000", "10,000", "11,000,000");
                 return;
             case 1:
+                setBackground(rootView, "red");
                 setQuestion(rootView, "How many different ethnic groups live in Russia?");
                 setRadioButtonAnswers(rootView, "186", "45", "15", "110");
                 return;
             case 2:
                 radioGroup.setVisibility(View.GONE);
                 editText.setVisibility(View.VISIBLE);
+                setBackground(rootView, "white");
                 setQuestion(rootView, "What is the national sport of Russia?");
                 return;
             case 3:
@@ -102,10 +105,12 @@ public class QuizFragment extends Fragment {
                 setRadioButtonAnswers(rootView, "okroshka, shchi, kvass, pelmeni", "tiblitsa, pogaca, xleb, strudla", "broscht, perogies, kapusniak, rosolnk", "stapici, pletenice, kifle, djevreci");
                 return;
             case 4:
+                setBackground(rootView, "red");
                 setQuestion(rootView, "What is the average yearly salary in Russia?");
                 setRadioButtonAnswers(rootView," $40,000 USD", "$20,000", "$15,000", "$8,0000");
                 return;
             case 5:
+                setBackground(rootView, "white");
                 setQuestion(rootView, "Who was Russia's last tsar?");
                 setRadioButtonAnswers(rootView, "Catherine the Great", "Nicholas II", "Alexander III", " Yaroslav I");
                 return;
@@ -114,10 +119,12 @@ public class QuizFragment extends Fragment {
                 setRadioButtonAnswers(rootView, "Cooking", "Going to the movies", "Attending theater events", "the art of sorcery");
                 return;
             case 7:
+                setBackground(rootView, "red");
                 setQuestion(rootView, "How many theatres are there in Saint Petersburg?");
                 setRadioButtonAnswers(rootView, "55", "400", "180", "23");
                 return;
             case 8:
+                setBackground(rootView, "white");
                 radioGroup.setVisibility(View.GONE);
                 checkBoxes.setVisibility(View.VISIBLE);
                 setQuestion(rootView, " What innovations have been invented by Russians?");
@@ -158,6 +165,17 @@ public class QuizFragment extends Fragment {
         answerView3.setText(answer3);
         CheckBox answerView4 = (CheckBox) rootView.findViewById(R.id.a4);
         answerView4.setText(answer4);
+    }
+
+
+    public void setBackground(View rootview, String color){
+        int redBackgroundColor = ContextCompat.getColor(getContext(), R.color.red_view);
+        int whiteBackgroundColor = ContextCompat.getColor(getContext()got s, R.color.white_view);
+        if (color == "red"){
+            rootview.setBackgroundColor(redBackgroundColor);
+        }else if ( color == "white"){
+            rootview.setBackgroundColor(whiteBackgroundColor);
+        }
     }
     /** method that checks which radio button is clicked and then verifies if it is the right answer. If/else statement **/
 //    public void onRadioButtonClicked(View rootview) {
