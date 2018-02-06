@@ -7,6 +7,17 @@
     tools:context="com.example.realrussiaquiz.MainActivity"
     android:weightSum="5">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="45dp"
+        android:layout_weight="2"
+        android:src="@drawable/oniondomechurch" />
+
 
     <TextView
         style="@style/Base.TextAppearance.AppCompat.Display2"
@@ -14,9 +25,9 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:padding="20dp"
-        android:layout_marginTop="100dp"
         android:layout_gravity="center"
-        android:text="@string/app_name" />
+        android:text="@string/app_name"
+        android:textColor="@android:color/black"/>
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="0dp"-->
@@ -34,13 +45,12 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:padding="30dp"
             android:text="@string/startquiz"
             android:textColor="@android:color/white"
-            android:padding="16dp"
             android:layout_margin="10dp"
             android:onClick="startQuiz"
+            android:textSize="20sp"
             style="@style/Base.Widget.AppCompat.Button.Colored"/>
     </FrameLayout>
 

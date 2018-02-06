@@ -8,4 +8,5 @@
     <color name="offwhite">#fafafa</color>
     <color name="red_view">@color/red</color>
     <color name="white_view">@color/offwhite</color>
+    <color name="black">@android:color/black</color>
 </resources>

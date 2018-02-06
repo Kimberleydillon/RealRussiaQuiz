@@ -12,9 +12,21 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAllCaps">true</item>
     </style>
+    <style name="CheckBoxDark" parent="@style/Base.TextAppearance.AppCompat.Subhead">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:buttonTint">@android:color/black</item>
+    </style>
     <style name="RadioButtons" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:padding">16dp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:buttonTint">@android:color/white</item>
+    </style>
+    <style name="RadioButtonsDark" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:buttonTint">@android:color/black</item>
     </style>
 </resources>

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Real Russia Quiz</string>
     <string name="description">Bears, Balalaikas or Balls? \nSo you think you know the real Russia</string>
-    <string name="startquiz">Start Quiz 🇷🇺</string>
+    <string name="startquiz">Start   🇷🇺</string>
     <string name="red">RED</string>
     <string name="blue">BLUE</string>
     <string name="qone">How many military casualties did the Soviet Union suffer in WW2?</string>
