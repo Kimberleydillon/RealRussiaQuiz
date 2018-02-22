@@ -7,12 +7,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.realrussiaquiz.model.Question;
 
@@ -20,6 +23,7 @@ import com.example.realrussiaquiz.model.Question;
 public class QuizFragment extends Fragment {
     private static final String TAG = QuizFragment.class.getName();
     private Question question;
+
 
     public QuizFragment() {
         Log.d("QuizFragment", "QuizFragment Constructor");
@@ -52,10 +56,12 @@ public class QuizFragment extends Fragment {
         } else {
             rootView = inflater.inflate(R.layout.fragment_quiz, container, false);
         }
+
+
         //In charge of setting up view only after rootview is returned and fragment instantiated.
         setupView(rootView);
 
-// There is no view until rootview is returned
+        // There is no view until rootview is returned.
         return rootView;
     }
 
@@ -78,46 +84,29 @@ public class QuizFragment extends Fragment {
 
     public void setRadioButtonAnswers(View rootView, String[] answers) {
         if (answers == null || answers.length != 4) {
-            Log.e("quiz fragment", "invalid answers");
+            Log.e(TAG, "invalid answers");
             return;
         }
+
         Log.d("QuizFragment", "setRadioButtonAnswers");
         RadioGroup group = rootView.findViewById(R.id.radiogroup);
-        RadioButton answerView1 = (RadioButton) rootView.findViewById(R.id.ra1);
+        RadioButton answerView1 = rootView.findViewById(R.id.ra1);
         answerView1.setText(answers[0]);
-        RadioButton answerView2 = (RadioButton) rootView.findViewById(R.id.ra2);
+        RadioButton answerView2 = rootView.findViewById(R.id.ra2);
         answerView2.setText(answers[1]);
-        RadioButton answerView3 = (RadioButton) rootView.findViewById(R.id.ra3);
+        RadioButton answerView3 = rootView.findViewById(R.id.ra3);
         answerView3.setText(answers[2]);
-        RadioButton answerView4 = (RadioButton) rootView.findViewById(R.id.ra4);
+        RadioButton answerView4 = rootView.findViewById(R.id.ra4);
         answerView4.setText(answers[3]);
 
-        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int radioButtonId) {
-                int answer = 0;
-                switch (radioButtonId) {
-                    case R.id.ra1:
-                        answer = 0;
-                        break;
-                    case R.id.ra2:
-                        answer = 1;
-                        break;
-                    case R.id.ra3:
-                        answer = 2;
-                        break;
-                    case R.id.ra4:
-                        answer = 3;
-                        break;
-                }
-                Log.d("quiz fragment", String.format("answer %s,correct %s", answer, question.isCorrect(new int[]{answer})));
-            }
-        });
+        //Set an on Change listener
+        group.setOnCheckedChangeListener(radioChangeListener);
     }
 
     public void setCheckboxAnswers(View rootView, String[] answers) {
         RadioGroup radioButtons = rootView.findViewById(R.id.radiogroup);
         LinearLayout checkboxesLayout = rootView.findViewById(R.id.checkboxes);
+        Button submitButton = rootView.findViewById(R.id.checkboxSubmitButton);
         checkboxesLayout.setVisibility(View.VISIBLE);
         radioButtons.setVisibility(View.GONE);
         if (answers == null || answers.length != 4) {
@@ -125,30 +114,81 @@ public class QuizFragment extends Fragment {
             return;
         }
         Log.d("QuizFragment", "setCheckboxAnswers");
-        CheckBox answerView1 = (CheckBox) rootView.findViewById(R.id.a1);
+        final CheckBox answerView1 = rootView.findViewById(R.id.a1);
         answerView1.setText(answers[0]);
-        CheckBox answerView2 = (CheckBox) rootView.findViewById(R.id.a2);
+        final CheckBox answerView2 = rootView.findViewById(R.id.a2);
         answerView2.setText(answers[1]);
-        CheckBox answerView3 = (CheckBox) rootView.findViewById(R.id.a3);
+        final CheckBox answerView3 = rootView.findViewById(R.id.a3);
         answerView3.setText(answers[2]);
-        CheckBox answerView4 = (CheckBox) rootView.findViewById(R.id.a4);
+        final CheckBox answerView4 = rootView.findViewById(R.id.a4);
         answerView4.setText(answers[3]);
 
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (answerView1.isChecked() && answerView2.isChecked() && answerView3.isChecked() && answerView4.isChecked()) {
+                    Log.d(TAG, "All checkboxes are Checked");
+                    Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d(TAG, "not all checkboxes are checked");
+                    Toast.makeText(getContext(), "\ud83d\ude45" + " Oй, oшибка " + " Incorrect" + " \ud83d\udeab", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
-    public void onCheckboxClicked(View rootview){
-        //is the view now checked?
-        boolean checked = ((CheckBox) rootview).isChecked();
-    }
 
-
-    public void setTextAnswers (View rootView){
-        Log.d( TAG, "setTextAndswers");
+    public void setTextAnswers(View rootView) {
+        Log.d(TAG, "setTextAnswers");
+        RelativeLayout editTextLayout = rootView.findViewById(R.id.edittextlayout);
         RadioGroup radioButtons = rootView.findViewById(R.id.radiogroup);
-        EditText inputAnswer = rootView.findViewById(R.id.edittext);
-        inputAnswer.setVisibility(View.VISIBLE);
+        Button submitButton = rootView.findViewById(R.id.editTextSubmitButton);
+        final EditText editText = rootView.findViewById(R.id.edittext);
         radioButtons.setVisibility(View.GONE);
+        editTextLayout.setVisibility(View.VISIBLE);
 
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            public void  onClick (View v) {
+                Log.v("EditText", editText.getText().toString());
+                String userInput = editText.getText().toString();
+                question.isCorrect(userInput);
+                if (question.isCorrect(userInput) == true){
+                    Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e" + "\n Bandy (ball hockey) is the most ideal answer but \n Hockey will also be accepted", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), "\ud83d\ude45" + " Oй, oшибка " + " Incorrect" + " \ud83d\udeab", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
+    RadioGroup.OnCheckedChangeListener radioChangeListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup radioGroup, int radioButtonId) {
+            Log.d(TAG, "Listening?");
+            int answer = 0;
+            switch (radioButtonId) {
+                case R.id.ra1:
+                    answer = 0;
+                    break;
+                case R.id.ra2:
+                    answer = 1;
+                    break;
+                case R.id.ra3:
+                    answer = 2;
+                    break;
+                case R.id.ra4:
+                    answer = 3;
+                    break;
+            }
+            question.isCorrect(new int[]{answer});
+            if (question.isCorrect(new int[]{answer}) == true) {
+
+                Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "\ud83d\ude45" + " Oй, oшибка " + " Incorrect" + " \ud83d\udeab", Toast.LENGTH_SHORT).show();
+            }
+            Log.d(TAG, "" + question.isCorrect(new int[]{answer}));
+        }
+    };
 
 }

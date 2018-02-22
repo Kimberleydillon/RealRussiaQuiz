@@ -2,6 +2,7 @@ package com.example.realrussiaquiz.model;
 
 import java.util.Arrays;
 
+import static com.example.realrussiaquiz.model.Question.QuestionType.RADIO;
 import static com.example.realrussiaquiz.model.Question.QuestionType.TEXT;
 
 /**
@@ -22,6 +23,9 @@ public class Question {
     private boolean isDark;
     //which background color
     private int backgroundColor;
+
+
+
     //the question types
     public enum QuestionType {
         RADIO, CHECK_BOX, TEXT
@@ -43,6 +47,7 @@ public class Question {
         this.textAnswer = textAnswer;
         this.isDark = isDark;
         this.backgroundColor = backgroundColor;
+        isCorrect(textAnswer);
     }
 
     //</editor-fold>
@@ -50,20 +55,25 @@ public class Question {
     public boolean isCorrect(String answer) {
         if (type != TEXT) {
             return false;
-        }else if(answer == "Hockey"){
+        } else if (answer.equalsIgnoreCase("Bandy")  || answer.equalsIgnoreCase("Hockey")) {
             return true;
         }
-
         return answer.equalsIgnoreCase(textAnswer);
     }
 
-    public boolean isCorrect(int[] answers) {
+    public boolean isCorrect(int [] answers){
         if (type == TEXT) {
             return false;
+            } else if (type == RADIO) {
+                if (Arrays.equals(answers, radioAnswer)) {
+                    return true;
+                }else{
+                    return false;
+            }
         }
-        //TODO: do this logic
-        return true;
+        return false;
     }
+
 
     //<editor-fold desc="Getters and Setters">
     public String getQuestionText() {

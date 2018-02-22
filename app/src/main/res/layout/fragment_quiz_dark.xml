@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="@color/colorPrimary"
     android:orientation="vertical" >
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".2"></FrameLayout>
+        android:layout_weight=".2" />
 
     <TextView
         android:id="@+id/question"
@@ -100,6 +101,14 @@
             android:layout_below="@id/a2"
             android:layout_alignParentTop="@id/a2"
             style="@style/CheckBoxDark"/>
+        <Button
+            android:id="@+id/checkboxSubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/button"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            />
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/edittextlayout"
@@ -118,6 +127,16 @@
             android:inputType="text"
             android:maxLines="1"
             android:textColor="@android:color/black"/>
+        <Button
+            android:id="@+id/editTextSubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="25dp"
+            android:text="@string/button"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            />
 
     </RelativeLayout>
 <!--TODO better alignment and spacing-->
