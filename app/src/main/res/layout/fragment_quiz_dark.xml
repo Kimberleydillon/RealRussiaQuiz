@@ -6,10 +6,28 @@
     android:layout_height="match_parent" android:background="@color/colorPrimary"
     android:orientation="vertical" >
 
-    <FrameLayout
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight=".2" />-->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".2" />
+        android:layout_height="wrap_content"
+        android:text="Quiz Progress"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:theme="@style/LinearProgressDark"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="20"/>
+
 
     <TextView
         android:id="@+id/question"
@@ -70,9 +88,9 @@
         android:id="@+id/checkboxes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="2.5"
         android:orientation="vertical"
-        android:layout_margin="16dp"
+        android:layout_margin="10dp"
         android:visibility="gone">
         <CheckBox
             android:id="@+id/a1"

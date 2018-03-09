@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         questions.add(new Question("What is Russia's largest industry?",
                 Question.QuestionType.RADIO,
                 new String[]{"Natural Gas", "Oil", "Lumber", "Vodka"},
-                new int[]{0,1,2,3},
+                new int[]{1},
                 false, R.color.colorPrimary));
         return questions;
     }

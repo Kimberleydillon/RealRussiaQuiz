@@ -29,4 +29,13 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:buttonTint">@android:color/black</item>
     </style>
+
+    <style name="LinearProgressLight" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/offwhite</item>
+        <item name="android:progressBackgroundTint">@color/black</item>
+    </style>
+
+    <style name="LinearProgressDark" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 </resources>

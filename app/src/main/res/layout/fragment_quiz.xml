@@ -6,10 +6,25 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <FrameLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".2"></FrameLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Quiz Progress"
+        android:textColor="@android:color/white"
+        android:padding="5dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:theme="@style/LinearProgressLight"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="20"/>
+
 
     <TextView
         android:id="@+id/question"

@@ -1,5 +1,7 @@
 package com.example.realrussiaquiz;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -128,6 +130,8 @@ public class QuizFragment extends Fragment {
                 if (answerView1.isChecked() && answerView2.isChecked() && answerView3.isChecked() && answerView4.isChecked()) {
                     Log.d(TAG, "All checkboxes are Checked");
                     Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e", Toast.LENGTH_SHORT).show();
+                    openWebPage("https://www.rbth.com/articles/2012/03/16/12_top_russian_inventions_that_changed_the_world_15164");
+
                 } else {
                     Log.d(TAG, "not all checkboxes are checked");
                     Toast.makeText(getContext(), "\ud83d\ude45" + " Oй, oшибка " + " Incorrect" + " \ud83d\udeab", Toast.LENGTH_SHORT).show();
@@ -137,6 +141,13 @@ public class QuizFragment extends Fragment {
         });
     }
 
+    public void openWebPage(String url) {
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 
     public void setTextAnswers(View rootView) {
         Log.d(TAG, "setTextAnswers");
@@ -184,6 +195,7 @@ public class QuizFragment extends Fragment {
             if (question.isCorrect(new int[]{answer}) == true) {
 
                 Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e", Toast.LENGTH_SHORT).show();
+
             } else {
                 Toast.makeText(getContext(), "\ud83d\ude45" + " Oй, oшибка " + " Incorrect" + " \ud83d\udeab", Toast.LENGTH_SHORT).show();
             }
