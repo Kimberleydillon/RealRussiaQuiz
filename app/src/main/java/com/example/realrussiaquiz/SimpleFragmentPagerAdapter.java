@@ -14,10 +14,12 @@ import java.util.List;
 
 public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     private List<Question> questions;
+    private ScoreManager scoreChanger;
 
-    public SimpleFragmentPagerAdapter(FragmentManager fm, List<Question> questions) {
+    public SimpleFragmentPagerAdapter(FragmentManager fm, ScoreManager scoreChanger, List<Question> questions) {
         super(fm);
         this.questions = questions;
+        this.scoreChanger = scoreChanger;
     }
 
     public SimpleFragmentPagerAdapter(FragmentManager fm) {
@@ -27,7 +29,7 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return QuizFragment.newInstance(questions.get(position));
+        return QuizFragment.newInstance(questions.get(position), scoreChanger);
     }
 
     @Override

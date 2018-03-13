@@ -5,20 +5,26 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.realrussiaquiz.model.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MainActivity extends AppCompatActivity {
     final Context context = null;
+
+    ProgressBar progressBar;
+    int score = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_start);
     }
+
 
     public void startQuiz(View view) {
 
@@ -27,12 +33,33 @@ public class MainActivity extends AppCompatActivity {
 
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = findViewById(R.id.viewpager);
+        progressBar = findViewById(R.id.progressBar);
 
         // Create an adapter that knows which fragment show be shown on each page
-        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(), makeQuestions());
+        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(), onScoreChange, makeQuestions());
 
         //Set the adapter onto the view pager
         viewPager.setAdapter(adapter);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                progressBar.setProgress(position);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        progressBar.setMax(adapter.getCount() - 1);
+        progressBar.setProgress(0);
     }
 
     private List<Question> makeQuestions() {
@@ -49,23 +76,23 @@ public class MainActivity extends AppCompatActivity {
                 Question.QuestionType.RADIO,
                 new String[]{"186", "45", "15", "110"},
                 new int[]{0},
-                false, R.color.red_view));
+                true, R.color.white_view));
         questions.add(new Question(
                 "What is the national sport of Russia?",
                 "Bandy",
-                true,
-                R.color.white_view));
+                false,
+                R.color.colorPrimary));
         questions.add(new Question(
                 "Which is a list of Russia's common eaten cuisine?",
                 Question.QuestionType.RADIO, new String[]{"okroshka, shchi, kvass, pelmeni", "tiblitsa, pogaca, xleb, strudla", "broscht, perogies, kapusniak, rosolnk", "stapici, pletenice, kifle, djevreci"},
                 new int[]{0},
-                false,
-                R.color.colorPrimary));
+                true,
+                R.color.white_view));
         questions.add(new Question(
                 "What is the average yearly salary in Russia?",
                 Question.QuestionType.RADIO, new String[]{"$40,000 USD", "$20,000", "$15,000", "$8,0000"},
                 new int[]{2},
-                false, R.color.red_view));
+                false, R.color.colorPrimary));
         questions.add(new Question("How many theatres are there in Saint Petersburg?",
                 Question.QuestionType.RADIO,
                 new String[]{"55", "400", "180", "23"},
@@ -80,18 +107,32 @@ public class MainActivity extends AppCompatActivity {
                 Question.QuestionType.RADIO,
                 new String[]{"Cooking", "Going to the movies", "Attending theater events", "the art of sorcery"},
                 new int[]{2},
-                false, R.color.red_view));
+                true, R.color.white_view));
         questions.add(new Question("What innovations have been invented by Russians",
                 Question.QuestionType.CHECK_BOX,
                 new String[]{"vodka, television, film school, paratrooping", "rollercoaster, yacht club, rebar, beehive frame, AK-47", "radiator, ac transformer, headlamp, vitamins", "electric submarine, periodic table of elements, solar cell, fire fighting foam"},
-                new int[]{0,1,2,3},
-                true, R.color.white_view));
+                new int[]{0, 1, 2, 3},
+                false, R.color.colorPrimary));
         questions.add(new Question("What is Russia's largest industry?",
                 Question.QuestionType.RADIO,
                 new String[]{"Natural Gas", "Oil", "Lumber", "Vodka"},
                 new int[]{1},
-                false, R.color.colorPrimary));
+                true, R.color.white_view));
         return questions;
     }
+
+    //<editor-fold desc="Listeners">
+    ScoreManager onScoreChange = new ScoreManager() {
+        @Override
+        public void addToScore() {
+            score++;
+        }
+
+        @Override
+        public int getScore() {
+            return score;
+        }
+    };
+    //</editor-fold>
 
 }

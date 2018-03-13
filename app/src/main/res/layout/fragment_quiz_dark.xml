@@ -10,23 +10,17 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="0dp"-->
         <!--android:layout_weight=".2" />-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Quiz Progress"
-        android:layout_marginTop="20dp"
-        android:padding="5dp"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:theme="@style/LinearProgressDark"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="20"/>
+    <TextView
+        android:id="@+id/scoreDisplay"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:text="0/10"
+        style="@style/Base.TextAppearance.AppCompat.Headline"
+        android:textColor="@color/black"/>
+
 
 
     <TextView

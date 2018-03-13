@@ -25,6 +25,7 @@ import com.example.realrussiaquiz.model.Question;
 public class QuizFragment extends Fragment {
     private static final String TAG = QuizFragment.class.getName();
     private Question question;
+    private ScoreManager scoreManager;
 
 
     public QuizFragment() {
@@ -32,9 +33,10 @@ public class QuizFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static QuizFragment newInstance(Question question) {
+    public static QuizFragment newInstance(Question question, ScoreManager scoreChanger) {
         Log.d("QuizFragment", "newInstance");
         QuizFragment fragment = new QuizFragment();
+        fragment.scoreManager = scoreChanger;
         fragment.question = question;
         return fragment;
     }
@@ -42,7 +44,6 @@ public class QuizFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Log.d(TAG, "onCreate");
         Log.d(TAG, question.toString());
     }
@@ -58,8 +59,6 @@ public class QuizFragment extends Fragment {
         } else {
             rootView = inflater.inflate(R.layout.fragment_quiz, container, false);
         }
-
-
         //In charge of setting up view only after rootview is returned and fragment instantiated.
         setupView(rootView);
 
@@ -82,6 +81,7 @@ public class QuizFragment extends Fragment {
                 setCheckboxAnswers(rootView, question.getQuestionChoices());
                 break;
         }
+
     }
 
     public void setRadioButtonAnswers(View rootView, String[] answers) {
@@ -126,11 +126,14 @@ public class QuizFragment extends Fragment {
         answerView4.setText(answers[3]);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            public void onClick(View rootView) {
                 if (answerView1.isChecked() && answerView2.isChecked() && answerView3.isChecked() && answerView4.isChecked()) {
                     Log.d(TAG, "All checkboxes are Checked");
                     Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e", Toast.LENGTH_SHORT).show();
                     openWebPage("https://www.rbth.com/articles/2012/03/16/12_top_russian_inventions_that_changed_the_world_15164");
+//                    score++;
+//                    Log.d(TAG, "Score is now: " + score);
+
 
                 } else {
                     Log.d(TAG, "not all checkboxes are checked");
@@ -159,13 +162,13 @@ public class QuizFragment extends Fragment {
         editTextLayout.setVisibility(View.VISIBLE);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
-            public void  onClick (View v) {
+            public void onClick(View v) {
                 Log.v("EditText", editText.getText().toString());
                 String userInput = editText.getText().toString();
                 question.isCorrect(userInput);
-                if (question.isCorrect(userInput) == true){
+                if (question.isCorrect(userInput) == true) {
                     Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e" + "\n Bandy (ball hockey) is the most ideal answer but \n Hockey will also be accepted", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Toast.makeText(getContext(), "\ud83d\ude45" + " Oй, oшибка " + " Incorrect" + " \ud83d\udeab", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -195,12 +198,21 @@ public class QuizFragment extends Fragment {
             if (question.isCorrect(new int[]{answer}) == true) {
 
                 Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e", Toast.LENGTH_SHORT).show();
-
+                scoreManager.addToScore();
+                Log.d(QuizFragment.class.getName(), "The score is " + scoreManager.getScore());
+                //TODO: updateScoreView();
             } else {
                 Toast.makeText(getContext(), "\ud83d\ude45" + " Oй, oшибка " + " Incorrect" + " \ud83d\udeab", Toast.LENGTH_SHORT).show();
             }
             Log.d(TAG, "" + question.isCorrect(new int[]{answer}));
+
         }
     };
 
+//    private void displayScore (int score, View rootview){
+//        TextView scoreView = rootview.findViewById(R.id.scoreDisplay);
+//        scoreView.setText(score + "/10");
+//
+//    }
+//
 }

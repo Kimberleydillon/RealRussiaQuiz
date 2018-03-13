@@ -23,6 +23,7 @@ public class Question {
     private boolean isDark;
     //which background color
     private int backgroundColor;
+    public int score;
 
 
 
@@ -73,6 +74,15 @@ public class Question {
         }
         return false;
     }
+
+//    public int makeScore(boolean isCorrect, int score){
+//        if (isCorrect){
+//            score = score + 1;
+//            return score;
+//        }else{
+//            return score;
+//        }
+//    }
 
 
     //<editor-fold desc="Getters and Setters">

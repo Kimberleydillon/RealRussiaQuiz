@@ -7,39 +7,34 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Quiz Progress"
-        android:textColor="@android:color/white"
-        android:padding="5dp"/>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:theme="@style/LinearProgressLight"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="20"/>
+        android:id="@+id/scoreDisplay"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:text="0/10"
+        style="@style/Base.TextAppearance.AppCompat.Headline"
+        android:textColor="@color/offwhite"/>
 
 
     <TextView
         android:id="@+id/question"
-        style="@style/Base.TextAppearance.AppCompat.Display1"
+        style="@style/Base.TextAppearance.AppCompat.Headline"
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="20dp"
         android:text="@string/qone"
-        android:textAlignment="textStart"
         android:textColor="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/offwhite">
 
 
     <RadioGroup
@@ -48,6 +43,8 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_margin="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:layout_weight="1"
         android:orientation="vertical"
         android:visibility="visible">
@@ -55,85 +52,85 @@
         <RadioButton
             android:id="@+id/ra1"
             style="@style/RadioButtons"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-
+            android:background="@color/colorPrimary"
             android:text="@string/q1a1" />
 
         <RadioButton
             android:id="@+id/ra2"
             style="@style/RadioButtons"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/ra1"
+            android:background="@color/colorPrimary"
             android:text="@string/q1a2" />
 
         <RadioButton
             android:id="@+id/ra3"
             style="@style/RadioButtons"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ra1"
+            android:background="@color/colorPrimary"
             android:text="@string/q1a3" />
 
         <RadioButton
             android:id="@+id/ra4"
+            android:layout_marginTop="16dp"
+            android:shadowDx="@android:integer/config_longAnimTime"
             style="@style/RadioButtons"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ra2"
-            android:layout_toRightOf="@id/ra3"
+            android:background="@color/colorPrimary"
             android:text="@string/q1a4" />
     </RadioGroup>
+      </LinearLayout>
 
     <LinearLayout
         android:id="@+id/checkboxes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
         android:layout_weight="2"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:background="@color/offwhite">
 
         <CheckBox
             android:id="@+id/a1"
             style="@style/CheckBox"
-            android:layout_alignParentLeft="true"
             android:layout_margin="16dp"
             android:buttonTint="@android:color/white"
             android:text="@string/q1a1"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"/>
 
         <CheckBox
             android:id="@+id/a2"
             style="@style/CheckBox"
-            android:layout_alignParentRight="true"
-
             android:layout_margin="16dp"
             android:buttonTint="@android:color/white"
             android:text="@string/q1a2"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"/>
 
         <CheckBox
             android:id="@+id/a3"
             style="@style/CheckBox"
-            android:layout_below="@id/a1"
             android:layout_margin="16dp"
             android:buttonTint="@android:color/white"
             android:text="@string/q1a3"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"/>
 
         <CheckBox
             android:id="@+id/a4"
             style="@style/CheckBox"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="@id/a2"
-            android:layout_below="@id/a2"
             android:layout_margin="16dp"
             android:buttonTint="@android:color/white"
             android:text="@string/q1a4"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"/>
         <Button
             android:id="@+id/checkboxSubmitButton"
             android:layout_width="wrap_content"
