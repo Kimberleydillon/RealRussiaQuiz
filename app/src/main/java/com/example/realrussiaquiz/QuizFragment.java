@@ -25,6 +25,7 @@ import com.example.realrussiaquiz.model.Question;
 public class QuizFragment extends Fragment {
     private static final String TAG = QuizFragment.class.getName();
     private Question question;
+    // a variable fo type interface called scoremanger. Still a reference
     private ScoreManager scoreManager;
 
 
@@ -36,6 +37,7 @@ public class QuizFragment extends Fragment {
     public static QuizFragment newInstance(Question question, ScoreManager scoreChanger) {
         Log.d("QuizFragment", "newInstance");
         QuizFragment fragment = new QuizFragment();
+        // this code says the rules dictated by the interface Scoremanager will be answer in the activity method scoreChanger.
         fragment.scoreManager = scoreChanger;
         fragment.question = question;
         return fragment;
@@ -130,11 +132,10 @@ public class QuizFragment extends Fragment {
                 if (answerView1.isChecked() && answerView2.isChecked() && answerView3.isChecked() && answerView4.isChecked()) {
                     Log.d(TAG, "All checkboxes are Checked");
                     Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e", Toast.LENGTH_SHORT).show();
+                    // intents as rewards for getting questions right. Redirect to more Russian news sources and recipes.
                     openWebPage("https://www.rbth.com/articles/2012/03/16/12_top_russian_inventions_that_changed_the_world_15164");
-//                    score++;
-//                    Log.d(TAG, "Score is now: " + score);
-
-
+                    scoreManager.addToScore();
+                    Log.d(QuizFragment.class.getName(), "The score is " + scoreManager.getScore());
                 } else {
                     Log.d(TAG, "not all checkboxes are checked");
                     Toast.makeText(getContext(), "\ud83d\ude45" + " Oй, oшибка " + " Incorrect" + " \ud83d\udeab", Toast.LENGTH_SHORT).show();
@@ -167,7 +168,9 @@ public class QuizFragment extends Fragment {
                 String userInput = editText.getText().toString();
                 question.isCorrect(userInput);
                 if (question.isCorrect(userInput) == true) {
-                    Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e" + "\n Bandy (ball hockey) is the most ideal answer but \n Hockey will also be accepted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "\ud83d\udc82" + " Mолодец!" + " Good work!" + " \ud83c\udf5e" + "\n Bandy (ball hockey) is the most ideal answer but Hockey will also be accepted", Toast.LENGTH_LONG).show();
+                    scoreManager.addToScore();
+                    Log.d(QuizFragment.class.getName(), "The score is " + scoreManager.getScore());
                 } else {
                     Toast.makeText(getContext(), "\ud83d\ude45" + " Oй, oшибка " + " Incorrect" + " \ud83d\udeab", Toast.LENGTH_SHORT).show();
                 }

@@ -122,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //<editor-fold desc="Listeners">
+
+    // the interface method that is getting resolved here. Interface scoreManager onScore Change that includes logic for adding score and getting score.
     ScoreManager onScoreChange = new ScoreManager() {
         @Override
         public void addToScore() {

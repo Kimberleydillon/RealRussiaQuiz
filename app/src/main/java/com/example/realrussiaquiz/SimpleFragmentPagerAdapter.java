@@ -15,7 +15,8 @@ import java.util.List;
 public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     private List<Question> questions;
     private ScoreManager scoreChanger;
-
+    // Where the parameters of fragment instantiation live.
+    // now the fragment once created must reference the interface scoremanager.
     public SimpleFragmentPagerAdapter(FragmentManager fm, ScoreManager scoreChanger, List<Question> questions) {
         super(fm);
         this.questions = questions;
